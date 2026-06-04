@@ -1,4 +1,4 @@
-
+import 'package:dartz/dartz.dart';
 import 'package:lms_adv/core/services/api_services.dart';
 import 'package:lms_adv/core/typedef/either.dart';
 
@@ -15,12 +15,12 @@ class AuthRepositoryImpl implements AuthRepositorires {
     required String email,
     required String password,
   }) async {
-    return await apiservices.post(
+    final result = await apiservices.post(
       "/auth/login/",
-      data: {},
-      fromJson: (json) {
-        return json['msg'];
-      },
+      data: {"email": email, "password": password},
     );
+    return result.fold((l) => left(l), (json) {
+      return right("login successful ");
+    });
   }
 }

@@ -22,7 +22,6 @@ class AppThemeMode {
           fontStyle: FontStyle.italic,
         ),
       ),
-      brightness: Brightness.dark,
       colorScheme: ColorScheme.fromSeed(seedColor: ColorPallet.primary),
     );
   }

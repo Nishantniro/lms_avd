@@ -19,6 +19,7 @@ class ApiServices {
     try {
       final Response response = await _dio.get(
         path,
+        data: data,
         queryParameters: queryParameters,
         options: options,
         cancelToken: cancleToken,
@@ -40,9 +41,11 @@ class ApiServices {
     T Function(dynamic)? fromJson,
   }) async {
     try {
-      final Response response = await _dio.get(
+      final Response response = await _dio.post(
         path,
         queryParameters: queryParameters,
+        data: data,
+
         options: options,
         cancelToken: cancleToken,
       );
