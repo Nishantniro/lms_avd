@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lms_adv/core/bloc/gatekeeper/gatekeeper_cubit.dart';
+import 'package:lms_adv/core/bloc/profile/profile_bloc.dart';
 import 'package:lms_adv/core/di/di_init.dart';
 import 'package:lms_adv/core/route/router.dart';
 import 'package:lms_adv/core/theme/theme_mode.dart';
@@ -16,7 +18,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => sl<LoginBloc>())],
+      providers: [
+        BlocProvider(create: (context) => sl<LoginBloc>()),
+        BlocProvider(create: (context) => sl<ProfileBloc>()),
+        BlocProvider(create: (context) => sl<GatekeeperCubit>()),
+      ],
       child: MaterialApp.router(
         title: 'LMS Advance',
         debugShowCheckedModeBanner: false,
