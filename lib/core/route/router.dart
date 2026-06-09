@@ -5,32 +5,34 @@ import 'package:lms_adv/features/auth/page/login_page.dart';
 import 'package:lms_adv/features/home/pages/home_page.dart';
 
 class AppRoute {
-  static GoRouter router() {
-    return GoRouter(
-      initialLocation: RouteName.splash.path,
-      routes: [
-        GoRoute(
-          path: RouteName.splash.path,
-          name: RouteName.splash,
-          builder: (context, state) {
-            return SplashScreen();
-          },
-        ),
-        GoRoute(
-          path: RouteName.home.path,
-          name: RouteName.home,
-          builder: (context, state) {
-            return Homepage();
-          },
-        ),
-        GoRoute(
-          path: RouteName.login.path,
-          name: RouteName.login,
-          builder: (context, state) {
-            return LoginPage();
-          },
-        ),
-      ],
-    );
-  }
+  static final GoRouter router = GoRouter(
+    initialLocation: RouteName.splash.path,
+    routes: [
+      GoRoute(
+        path: RouteName.splash.path,
+        name: RouteName.splash,
+        builder: (context, state) {
+          return SplashScreen();
+        },
+      ),
+      GoRoute(
+        path: RouteName.home.path,
+        name: RouteName.home,
+        builder: (context, state) {
+          return Homepage();
+        },
+      ),
+      GoRoute(
+        path: RouteName.login.path,
+        name: RouteName.login,
+        builder: (context, state) {
+          return LoginPage();
+        },
+      ),
+    ],
+  );
+}
+
+void logout() {
+  AppRoute.router.goNamed(RouteName.login);
 }

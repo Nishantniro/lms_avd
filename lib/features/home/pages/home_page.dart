@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lms_adv/core/bloc/profile/profile_bloc.dart';
 import 'package:lms_adv/core/di/di_init.dart';
-import 'package:lms_adv/core/route/route_name.dart';
+import 'package:lms_adv/core/route/router.dart';
 import 'package:lms_adv/core/storage/token_storage.dart';
 import 'package:lms_adv/core/widgets/app_button.dart';
 import 'package:lms_adv/core/widgets/app_text.dart';
@@ -34,12 +33,12 @@ class _HomepageState extends State<Homepage> {
             children: [
               BlocBuilder<ProfileBloc, ProfileState>(
                 builder: (context, state) {
-                  state.maybeWhen(
+                  return state.maybeWhen(
                     orElse: () {
                       return Center(
                         child: LoadingAnimationWidget.newtonCradle(
                           color: Colors.black,
-                          size: 60,
+                          size: 40,
                         ),
                       );
                     },
@@ -50,10 +49,10 @@ class _HomepageState extends State<Homepage> {
                         child: Column(
                           children: [
                             CircleAvatar(
-                              radius: 50,
+                              radius: 40,
                               child: Icon(Icons.person, size: 50),
                             ),
-                            Gap(12),
+                            Gap(10),
                             AppText(profile.name, type: AppTextType.body),
                             Gap(4),
                             AppText(
@@ -61,6 +60,20 @@ class _HomepageState extends State<Homepage> {
                               type: AppTextType.caption,
                             ),
                             Gap(4),
+
+                            AppButton(
+                              backgroundColor: const Color.fromARGB(
+                                255,
+                                60,
+                                1,
+                                70,
+                              ),
+
+                              text: profile.hastrainerprofile
+                                  ? "Trainer profile"
+                                  : "Apply",
+                              onPressed: () {},
+                            ),
                           ],
                         ),
                       );
@@ -68,8 +81,15 @@ class _HomepageState extends State<Homepage> {
                     failure: (failure) {
                       return Center(child: AppText(failure.message));
                     },
+                    loading: () {
+                      return Center(
+                        child: LoadingAnimationWidget.newtonCradle(
+                          color: Colors.black,
+                          size: 40,
+                        ),
+                      );
+                    },
                   );
-                  return SizedBox();
                 },
               ),
               AppButton(
@@ -79,8 +99,7 @@ class _HomepageState extends State<Homepage> {
                 backgroundColor: const Color.fromARGB(255, 60, 1, 70),
                 onPressed: () async {
                   await sl<TokenStorageService>().clear();
-                  if (!context.mounted) return;
-                  context.goNamed(RouteName.login);
+                  logout();
                 },
               ),
             ],

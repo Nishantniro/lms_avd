@@ -29,7 +29,7 @@ void init() {
   sl.registerLazySingleton(() => TokenStorageService(sl()));
   sl.registerLazySingleton(() => FlutterSecureStorage());
   sl.registerLazySingleton(() => ApiServices(dio: sl()));
-  sl.registerLazySingleton(() => DioClient().dio);
+  sl.registerLazySingleton(() => DioClient(authTokenInterceptor: sl()).dio);
   sl.registerLazySingleton(
     () => AuthTokenInterceptor(tokenStorageService: sl()),
   );

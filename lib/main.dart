@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         theme: AppThemeMode.lightTheme(context),
         darkTheme: AppThemeMode.darkTheme(context),
         themeMode: ThemeMode.system,
-        routerConfig: AppRoute.router(),
+        routerConfig: AppRoute.router,
       ),
     );
   }

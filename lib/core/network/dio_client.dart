@@ -6,8 +6,9 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioClient {
   late Dio _dio;
+  final AuthTokenInterceptor _authTokenInterceptor;
 
-  DioClient() {
+  DioClient({required this._authTokenInterceptor}) {
     _dio = Dio(BaseOptions(baseUrl: kBaseUrl));
     _dio.interceptors.add(
       PrettyDioLogger(
@@ -27,6 +28,7 @@ class DioClient {
         },
       ),
     );
+    _dio.interceptors.add(_authTokenInterceptor);
   }
   Dio get dio => _dio;
 }
