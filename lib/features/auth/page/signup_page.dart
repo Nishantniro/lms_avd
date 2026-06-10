@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lms_adv/core/route/route_name.dart';
 import 'package:lms_adv/core/utils/snackbar_utils.dart';
 import 'package:lms_adv/core/widgets/app_button.dart';
 import 'package:lms_adv/core/widgets/app_text.dart';
@@ -149,7 +151,7 @@ class _SignUpPageState extends State<SignupPage> {
                   listener: (context, state) {
                     state.whenOrNull(
                       loaded: (msg) {
-                        // context.goNamed(RouteName.home);
+                        context.goNamed(RouteName.verifyemail);
                         AppSnackBar.success(context, message: msg);
                       },
                       failure: (failure) {
@@ -176,6 +178,17 @@ class _SignUpPageState extends State<SignupPage> {
                       },
                     );
                   },
+                ),
+                Row(
+                  children: [
+                    Text("Already have account?"),
+                    TextButton(
+                      onPressed: () {
+                        context.go(RouteName.login);
+                      },
+                      child: Text("Login"),
+                    ),
+                  ],
                 ),
               ],
             ),

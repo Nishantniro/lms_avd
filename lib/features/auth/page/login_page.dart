@@ -156,6 +156,17 @@ class _LoginPageState extends State<LoginPage> {
                     );
                   },
                 ),
+                Row(
+                  children: [
+                    Text("Dont have account?"),
+                    TextButton(
+                      onPressed: () {
+                        context.go(RouteName.signup);
+                      },
+                      child: Text("Signup"),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

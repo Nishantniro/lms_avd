@@ -6,6 +6,8 @@ import 'package:lms_adv/core/di/di_init.dart';
 import 'package:lms_adv/core/route/router.dart';
 import 'package:lms_adv/core/theme/theme_mode.dart';
 import 'package:lms_adv/features/auth/bloc/login/login_bloc.dart';
+import 'package:lms_adv/features/auth/bloc/signup/signup_bloc.dart';
+import 'package:lms_adv/features/auth/bloc/verify_email/verify_email_bloc.dart';
 
 void main() {
   init();
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<LoginBloc>()),
         BlocProvider(create: (context) => sl<ProfileBloc>()),
         BlocProvider(create: (context) => sl<GatekeeperCubit>()),
+        BlocProvider(create: (context) => sl<SignupBloc>()),
+        BlocProvider(create: (context) => sl<VerifyEmailBloc>()),
       ],
       child: MaterialApp.router(
         title: 'LMS Advance',
