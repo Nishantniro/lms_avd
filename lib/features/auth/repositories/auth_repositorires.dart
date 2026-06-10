@@ -3,9 +3,13 @@ import 'package:lms_adv/core/models/token_model.dart';
 import 'package:lms_adv/core/services/api_services.dart';
 import 'package:lms_adv/core/storage/token_storage.dart';
 import 'package:lms_adv/core/typedef/either.dart';
+import 'package:lms_adv/features/auth/model/signup_model.dart';
 
 abstract class AuthRepositorires {
   FutureEither<String> login({required String email, required String password});
+  FutureEither<String> signup({required SignupModel signupmodel});
+
+
 }
 
 class AuthRepositoryImpl implements AuthRepositorires {
@@ -28,6 +32,17 @@ class AuthRepositoryImpl implements AuthRepositorires {
     return result.fold((l) => left(l), (json) async {
       await _storageService.saveTokens(TokenModel.fromMap(json['token']));
       return right("login successful ");
+    });
+  }
+
+  @override
+  FutureEither<String> signup({required final SignupModel signupmodel}) async {
+    final result = await apiservices.post(
+      "/auth/sign-up/",
+      data: signupmodel.toMap(),
+    );
+    return result.fold((l) => left(l), (r) {
+      return Right(r['detail']?.toString() ?? 'successful');
     });
   }
 }
