@@ -37,7 +37,7 @@ class _SignUpPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Form(
             key: _formkey,
@@ -151,7 +151,10 @@ class _SignUpPageState extends State<SignupPage> {
                   listener: (context, state) {
                     state.whenOrNull(
                       loaded: (msg) {
-                        context.goNamed(RouteName.verifyemail);
+                        context.goNamed(
+                          RouteName.verifyemail,
+                          extra: _emailController.text,
+                        );
                         AppSnackBar.success(context, message: msg);
                       },
                       failure: (failure) {

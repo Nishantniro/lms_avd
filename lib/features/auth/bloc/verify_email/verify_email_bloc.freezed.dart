@@ -449,8 +449,8 @@ return failure(_that.failure);case _:
 /// @nodoc
 
 
-class _Initial implements VerifyEmailState {
-  const _Initial();
+class _Initial extends VerifyEmailState {
+  const _Initial(): super._();
   
 
 
@@ -481,8 +481,8 @@ String toString() {
 /// @nodoc
 
 
-class _Loading implements VerifyEmailState {
-  const _Loading();
+class _Loading extends VerifyEmailState {
+  const _Loading(): super._();
   
 
 
@@ -513,8 +513,8 @@ String toString() {
 /// @nodoc
 
 
-class _Loaded implements VerifyEmailState {
-  const _Loaded();
+class _Loaded extends VerifyEmailState {
+  const _Loaded(): super._();
   
 
 
@@ -545,8 +545,8 @@ String toString() {
 /// @nodoc
 
 
-class _Failure implements VerifyEmailState {
-  const _Failure(this.failure);
+class _Failure extends VerifyEmailState {
+  const _Failure(this.failure): super._();
   
 
  final  Failure failure;
