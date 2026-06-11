@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:lms_adv/core/models/token_model.dart';
 import 'package:lms_adv/core/services/api_services.dart';
@@ -11,6 +10,9 @@ abstract class AuthRepositorires {
   FutureEither<String> login({required String email, required String password});
   FutureEither<String> signup({required SignupModel signupmodel});
   FutureEither<String> verifyEmail({required VerifyEmailRequestModel verify});
+    FutureEither<String> resendOtp({required String email});
+
+
 }
 
 class AuthRepositoryImpl implements AuthRepositorires {
@@ -58,6 +60,17 @@ class AuthRepositoryImpl implements AuthRepositorires {
     return response.fold((l) => Left(l), (r) async {
       await _storageService.saveTokens(TokenModel.fromMap(r['token']));
       return Right("Signup sucessful");
+    });
+  }
+
+  @override
+  FutureEither<String> resendOtp({required String email}) async {
+    final result = await apiservices.post(
+      "/auth/resend-email-verification/",
+      data: email,
+    );
+    return result.fold((l) => left(l), (r) {
+      return Right(r['detail']?.toString() ?? 'successful');
     });
   }
 }

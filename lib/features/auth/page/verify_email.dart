@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -20,11 +22,40 @@ class VerifyEmail extends StatefulWidget {
 
 class _VerifyEmailState extends State<VerifyEmail> {
   final PinInputController otpController = PinInputController();
+  Timer? timer;
+  int seconds = 60;
+  bool canResend = false;
 
   @override
   void dispose() {
+    timer?.cancel();
     otpController.dispose();
     super.dispose();
+  }
+
+  void startTimer() {
+    seconds = 60;
+    canResend = false;
+    timer?.cancel();
+
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (seconds > 0) {
+        setState(() {
+          seconds--;
+        });
+      } else {
+        setState(() {
+          canResend = true;
+        });
+        timer.cancel();
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
   }
 
   @override
@@ -43,6 +74,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
             Gap(20),
             AppText(
               "Enter your otp sent on ${widget.email}",
+
               type: AppTextType.caption,
               fontWeight: FontWeight.w400,
               color: Theme.of(context).colorScheme.primary,
@@ -56,8 +88,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   },
 
                   loaded: () {
-                    
-
                     context.goNamed(RouteName.home);
                     AppSnackBar.success(context, message: "email Verified");
                   },
@@ -86,12 +116,23 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   ),
                   theme: MaterialPinTheme(
                     shape: MaterialPinShape.outlined,
-                    cellSize: Size(40, 40),
+                    cellSize: Size(45, 45),
                     borderRadius: BorderRadius.circular(12),
                   ),
                 );
               },
             ),
+            AppText("Didn't recceived code ?"),
+            canResend
+                ? TextButton(
+                    onPressed: () {
+                      context.read<VerifyEmailBloc>().add(
+                        VerifyEmailEvent.resendOtp(email: widget.email),
+                      );
+                    },
+                    child: AppText("resend otp"),
+                  )
+                : AppText("Resend in ${seconds}s"),
           ],
         ),
       ),

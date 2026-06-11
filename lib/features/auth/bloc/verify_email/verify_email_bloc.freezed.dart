@@ -14,61 +14,30 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$VerifyEmailEvent {
 
- VerifyEmailRequestModel get verifyEmailRequestModel;
-/// Create a copy of VerifyEmailEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$VerifyEmailEventCopyWith<VerifyEmailEvent> get copyWith => _$VerifyEmailEventCopyWithImpl<VerifyEmailEvent>(this as VerifyEmailEvent, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is VerifyEmailEvent&&(identical(other.verifyEmailRequestModel, verifyEmailRequestModel) || other.verifyEmailRequestModel == verifyEmailRequestModel));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VerifyEmailEvent);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,verifyEmailRequestModel);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'VerifyEmailEvent(verifyEmailRequestModel: $verifyEmailRequestModel)';
+  return 'VerifyEmailEvent()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $VerifyEmailEventCopyWith<$Res>  {
-  factory $VerifyEmailEventCopyWith(VerifyEmailEvent value, $Res Function(VerifyEmailEvent) _then) = _$VerifyEmailEventCopyWithImpl;
-@useResult
-$Res call({
- VerifyEmailRequestModel verifyEmailRequestModel
-});
-
-
-
-
-}
-/// @nodoc
-class _$VerifyEmailEventCopyWithImpl<$Res>
-    implements $VerifyEmailEventCopyWith<$Res> {
-  _$VerifyEmailEventCopyWithImpl(this._self, this._then);
-
-  final VerifyEmailEvent _self;
-  final $Res Function(VerifyEmailEvent) _then;
-
-/// Create a copy of VerifyEmailEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? verifyEmailRequestModel = null,}) {
-  return _then(_self.copyWith(
-verifyEmailRequestModel: null == verifyEmailRequestModel ? _self.verifyEmailRequestModel : verifyEmailRequestModel // ignore: cast_nullable_to_non_nullable
-as VerifyEmailRequestModel,
-  ));
-}
-
+class $VerifyEmailEventCopyWith<$Res>  {
+$VerifyEmailEventCopyWith(VerifyEmailEvent _, $Res Function(VerifyEmailEvent) __);
 }
 
 
@@ -86,11 +55,12 @@ extension VerifyEmailEventPatterns on VerifyEmailEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _VerifyEmail value)?  verifyemail,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _VerifyEmail value)?  verifyemail,TResult Function( _ResendOtp value)?  resendOtp,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _VerifyEmail() when verifyemail != null:
-return verifyemail(_that);case _:
+return verifyemail(_that);case _ResendOtp() when resendOtp != null:
+return resendOtp(_that);case _:
   return orElse();
 
 }
@@ -108,11 +78,12 @@ return verifyemail(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _VerifyEmail value)  verifyemail,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _VerifyEmail value)  verifyemail,required TResult Function( _ResendOtp value)  resendOtp,}){
 final _that = this;
 switch (_that) {
 case _VerifyEmail():
-return verifyemail(_that);case _:
+return verifyemail(_that);case _ResendOtp():
+return resendOtp(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -129,11 +100,12 @@ return verifyemail(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _VerifyEmail value)?  verifyemail,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _VerifyEmail value)?  verifyemail,TResult? Function( _ResendOtp value)?  resendOtp,}){
 final _that = this;
 switch (_that) {
 case _VerifyEmail() when verifyemail != null:
-return verifyemail(_that);case _:
+return verifyemail(_that);case _ResendOtp() when resendOtp != null:
+return resendOtp(_that);case _:
   return null;
 
 }
@@ -150,10 +122,11 @@ return verifyemail(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( VerifyEmailRequestModel verifyEmailRequestModel)?  verifyemail,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( VerifyEmailRequestModel verifyEmailRequestModel)?  verifyemail,TResult Function( String email)?  resendOtp,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _VerifyEmail() when verifyemail != null:
-return verifyemail(_that.verifyEmailRequestModel);case _:
+return verifyemail(_that.verifyEmailRequestModel);case _ResendOtp() when resendOtp != null:
+return resendOtp(_that.email);case _:
   return orElse();
 
 }
@@ -171,10 +144,11 @@ return verifyemail(_that.verifyEmailRequestModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( VerifyEmailRequestModel verifyEmailRequestModel)  verifyemail,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( VerifyEmailRequestModel verifyEmailRequestModel)  verifyemail,required TResult Function( String email)  resendOtp,}) {final _that = this;
 switch (_that) {
 case _VerifyEmail():
-return verifyemail(_that.verifyEmailRequestModel);case _:
+return verifyemail(_that.verifyEmailRequestModel);case _ResendOtp():
+return resendOtp(_that.email);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +165,11 @@ return verifyemail(_that.verifyEmailRequestModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( VerifyEmailRequestModel verifyEmailRequestModel)?  verifyemail,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( VerifyEmailRequestModel verifyEmailRequestModel)?  verifyemail,TResult? Function( String email)?  resendOtp,}) {final _that = this;
 switch (_that) {
 case _VerifyEmail() when verifyemail != null:
-return verifyemail(_that.verifyEmailRequestModel);case _:
+return verifyemail(_that.verifyEmailRequestModel);case _ResendOtp() when resendOtp != null:
+return resendOtp(_that.email);case _:
   return null;
 
 }
@@ -209,11 +184,11 @@ class _VerifyEmail implements VerifyEmailEvent {
   const _VerifyEmail({required this.verifyEmailRequestModel});
   
 
-@override final  VerifyEmailRequestModel verifyEmailRequestModel;
+ final  VerifyEmailRequestModel verifyEmailRequestModel;
 
 /// Create a copy of VerifyEmailEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$VerifyEmailCopyWith<_VerifyEmail> get copyWith => __$VerifyEmailCopyWithImpl<_VerifyEmail>(this, _$identity);
 
@@ -239,7 +214,7 @@ String toString() {
 /// @nodoc
 abstract mixin class _$VerifyEmailCopyWith<$Res> implements $VerifyEmailEventCopyWith<$Res> {
   factory _$VerifyEmailCopyWith(_VerifyEmail value, $Res Function(_VerifyEmail) _then) = __$VerifyEmailCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  VerifyEmailRequestModel verifyEmailRequestModel
 });
@@ -258,10 +233,76 @@ class __$VerifyEmailCopyWithImpl<$Res>
 
 /// Create a copy of VerifyEmailEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? verifyEmailRequestModel = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? verifyEmailRequestModel = null,}) {
   return _then(_VerifyEmail(
 verifyEmailRequestModel: null == verifyEmailRequestModel ? _self.verifyEmailRequestModel : verifyEmailRequestModel // ignore: cast_nullable_to_non_nullable
 as VerifyEmailRequestModel,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _ResendOtp implements VerifyEmailEvent {
+  const _ResendOtp({required this.email});
+  
+
+ final  String email;
+
+/// Create a copy of VerifyEmailEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ResendOtpCopyWith<_ResendOtp> get copyWith => __$ResendOtpCopyWithImpl<_ResendOtp>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResendOtp&&(identical(other.email, email) || other.email == email));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,email);
+
+@override
+String toString() {
+  return 'VerifyEmailEvent.resendOtp(email: $email)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ResendOtpCopyWith<$Res> implements $VerifyEmailEventCopyWith<$Res> {
+  factory _$ResendOtpCopyWith(_ResendOtp value, $Res Function(_ResendOtp) _then) = __$ResendOtpCopyWithImpl;
+@useResult
+$Res call({
+ String email
+});
+
+
+
+
+}
+/// @nodoc
+class __$ResendOtpCopyWithImpl<$Res>
+    implements _$ResendOtpCopyWith<$Res> {
+  __$ResendOtpCopyWithImpl(this._self, this._then);
+
+  final _ResendOtp _self;
+  final $Res Function(_ResendOtp) _then;
+
+/// Create a copy of VerifyEmailEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? email = null,}) {
+  return _then(_ResendOtp(
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

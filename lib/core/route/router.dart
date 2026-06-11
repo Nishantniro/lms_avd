@@ -8,7 +8,6 @@ import 'package:lms_adv/features/home/pages/home_page.dart';
 
 class AppRoute {
   static final GoRouter router = GoRouter(
-    
     initialLocation: RouteName.splash.path,
 
     routes: [
@@ -37,8 +36,8 @@ class AppRoute {
         path: RouteName.verifyemail.path,
         name: RouteName.verifyemail,
         builder: (context, state) {
-          final email = state.extra as String;
-          return VerifyEmail(email: email,);
+          final email = state.extra;
+          return VerifyEmail(email: email.toString());
         },
       ),
       GoRoute(

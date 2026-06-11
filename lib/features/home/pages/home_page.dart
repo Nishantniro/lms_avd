@@ -74,7 +74,9 @@ class _HomepageState extends State<Homepage> {
                                   : "Apply",
                               onPressed: () {},
                             ),
+                            Gap(10),
                             AppButton(
+                              icon: Icons.logout,
                               type: ButtonType.filled,
                               text: "Logout",
                               //icon: Icons.logout_rounded,
@@ -107,17 +109,7 @@ class _HomepageState extends State<Homepage> {
                   );
                 },
               ),
-              AppButton(
-                type: ButtonType.filled,
-                text: "Logout",
-                icon: Icons.logout_rounded,
-                backgroundColor: const Color.fromARGB(255, 60, 1, 70),
-                onPressed: () async {
-                  await sl<TokenStorageService>().clear();
-                  logout();
-                },
-              ),
-            ],
+             ],
           ),
         ),
       ),

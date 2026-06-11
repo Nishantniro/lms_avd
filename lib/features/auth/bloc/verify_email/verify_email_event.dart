@@ -5,4 +5,7 @@ abstract class VerifyEmailEvent with _$VerifyEmailEvent {
   const factory VerifyEmailEvent.verifyemail({
     required VerifyEmailRequestModel verifyEmailRequestModel,
   }) = _VerifyEmail;
+  const factory VerifyEmailEvent.resendOtp({
+     required String email
+  }) = _ResendOtp;
 }
