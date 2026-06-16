@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_adv/core/route/route_name.dart';
 import 'package:lms_adv/core/utils/snackbar_utils.dart';
@@ -8,6 +7,7 @@ import 'package:lms_adv/core/widgets/app_text.dart';
 import 'package:lms_adv/core/widgets/custom_text_form.dart';
 import 'package:lms_adv/features/auth/bloc/signup/signup_bloc.dart';
 import 'package:lms_adv/features/auth/model/signup_model.dart';
+import 'package:lms_adv/core/bloc/exports.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});

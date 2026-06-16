@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_adv/core/extension/context_extension.dart';
@@ -11,6 +10,7 @@ import 'package:lms_adv/core/widgets/app_text.dart';
 import 'package:lms_adv/features/auth/bloc/verify_email/verify_email_bloc.dart';
 import 'package:lms_adv/features/auth/model/verify_email_request.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:lms_adv/core/bloc/exports.dart';
 
 class VerifyEmail extends StatefulWidget {
   const VerifyEmail({super.key, required this.email});
@@ -87,7 +87,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                     context.showDialogBox();
                   },
 
-                  loaded: () {
+                  loaded: (r) {
                     context.goNamed(RouteName.home);
                     AppSnackBar.success(context, message: "email Verified");
                   },

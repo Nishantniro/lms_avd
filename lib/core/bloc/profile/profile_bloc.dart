@@ -1,8 +1,8 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lms_adv/core/error/falilure.dart';
 import 'package:lms_adv/core/models/profile_model.dart';
 import 'package:lms_adv/features/home/repositories/profile_repository.dart';
+import 'package:lms_adv/core/bloc/exports.dart';
+
 
 part 'profile_event.dart';
 part 'profile_state.dart';
