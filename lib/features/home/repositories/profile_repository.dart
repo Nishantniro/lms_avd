@@ -9,13 +9,22 @@ abstract class ProfileRepository {
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final ApiServices apiServices;
+  ProfileModel? _cachedProfilemodel;
 
   ProfileRepositoryImpl({required this.apiServices});
   @override
   FutureEither<ProfileModel> profile() async {
-    final response = await apiServices.get("/profile/me/");
-    return response.fold((l) => left(l), (json) {
-      return Right(ProfileModel.fromMap(json));
-    });
+    if (_cachedProfilemodel != null) {
+      return Right(_cachedProfilemodel!);
+    }
+
+   return await apiServices.get(
+      "/profile/me/",
+      fromJson: (map) {
+        _cachedProfilemodel = ProfileModel.fromMap(map);
+        return _cachedProfilemodel!;
+      },
+    );
+
   }
 }
