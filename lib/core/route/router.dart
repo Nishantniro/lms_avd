@@ -5,6 +5,8 @@ import 'package:lms_adv/features/auth/page/login_page.dart';
 import 'package:lms_adv/features/auth/page/signup_page.dart';
 import 'package:lms_adv/features/auth/page/verify_email.dart';
 import 'package:lms_adv/features/home/pages/home_page.dart';
+import 'package:lms_adv/features/trainer/pages/apply_trainer.dart';
+import 'package:lms_adv/features/trainer/pages/trainer_profile.dart';
 
 class AppRoute {
   static final GoRouter router = GoRouter(
@@ -45,6 +47,20 @@ class AppRoute {
         name: RouteName.signup,
         builder: (context, state) {
           return SignupPage();
+        },
+      ),
+      GoRoute(
+        path: RouteName.applyTrainer.path,
+        name: RouteName.applyTrainer,
+        builder: (context, state) {
+          return ApplyTrainer();
+        },
+      ),
+      GoRoute(
+        path: RouteName.trainerProfile.path,
+        name: RouteName.trainerProfile,
+        builder: (context, state) {
+          return TrainerProfile();
         },
       ),
     ],

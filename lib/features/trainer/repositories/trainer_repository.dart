@@ -8,14 +8,14 @@ abstract class TrainerRepository {
 }
 
 class TrainerRepositoryimpl implements TrainerRepository {
-  final ApiServices _services;
-  TrainerRepositoryimpl({required this._services});
+  final ApiServices _apiservices;
+  TrainerRepositoryimpl({required this._apiservices});
 
   @override
   FutureEither<String> applyTrainer({
     required ApplyTrainerModel applyModel,
   }) async {
-    return await _services.post(
+    return await _apiservices.post(
       "/trainer/apply/",
       data: applyModel.toMap(),
       fromJson: (json) {
