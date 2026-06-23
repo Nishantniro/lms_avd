@@ -51,6 +51,4 @@ class CategoryModel {
       'is_active': isActive,
     };
   }
-
-  Object? toList() {}
 }
