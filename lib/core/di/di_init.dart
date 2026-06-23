@@ -11,6 +11,7 @@ import 'package:lms_adv/features/auth/bloc/verify_email/verify_email_bloc.dart';
 import 'package:lms_adv/features/auth/repositories/auth_repositorires.dart';
 import 'package:lms_adv/features/home/repositories/profile_repository.dart';
 import 'package:lms_adv/features/trainer/bloc/trainer_apply/trainer_apply_bloc.dart';
+import 'package:lms_adv/features/trainer/bloc/trainer_profile/trainer_profile_bloc.dart';
 import 'package:lms_adv/features/trainer/repositories/trainer_repository.dart';
 
 final sl = GetIt.instance;
@@ -23,6 +24,7 @@ void init() {
   sl.registerLazySingleton(() => GatekeeperCubit(tokenStorageService: sl()));
   sl.registerLazySingleton(() => VerifyEmailBloc(authRepositorires: sl()));
   sl.registerLazySingleton(() => TrainerApplyBloc(trainerRepository: sl()));
+  sl.registerLazySingleton(() => TrainerProfileBloc(repo: sl()));
   //repo
   sl.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(apiServices: sl()),
