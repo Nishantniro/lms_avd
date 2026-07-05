@@ -89,3 +89,5 @@ class SomethingWentWrongFailure extends Failure {
   @override
   String get message => "Something went wrong";
 }
+
+

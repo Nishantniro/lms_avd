@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lms_adv/core/bloc/exports.dart';
+import 'package:lms_adv/core/route/route_name.dart';
 import 'package:lms_adv/features/trainer/bloc/trainer_profile/trainer_profile_bloc.dart';
 
 class TrainerProfile extends StatefulWidget {
@@ -19,6 +21,17 @@ class _TrainerProfileState extends State<TrainerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            tooltip: "Create Course",
+            onPressed: () {
+              context.pushNamed(RouteName.createCourse);
+            },
+            icon: Icon(Icons.add),
+          ),
+        ],
+      ),
       body: BlocBuilder<TrainerProfileBloc, TrainerProfileState>(
         builder: (context, state) {
           return state.maybeWhen(

@@ -9,6 +9,7 @@ import 'package:lms_adv/core/storage/token_storage.dart';
 import 'package:lms_adv/core/widgets/app_button.dart';
 import 'package:lms_adv/core/widgets/app_text.dart';
 import 'package:lms_adv/core/bloc/exports.dart';
+import 'package:lms_adv/features/course/bloc/get_course/get_course_bloc.dart';
 
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -24,6 +25,7 @@ class _HomepageState extends State<Homepage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     context.read<ProfileBloc>().add(ProfileEvent.profile());
+    context.read<GetCourseBloc>().add(GetCourseEvent.getCourse());
   }
 
   @override
@@ -122,12 +124,64 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
       appBar: AppBar(title: Text("welcome home")),
-      body: Center(
-        child: LoadingAnimationWidget.flickr(
-          leftDotColor: Colors.red,
-          rightDotColor: Colors.cyanAccent,
-          size: 60,
-        ),
+      body: BlocBuilder<GetCourseBloc, GetCourseState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+            loading: () => Center(
+              child: LoadingAnimationWidget.flickr(
+                leftDotColor: Colors.red,
+                rightDotColor: Colors.cyanAccent,
+                size: 60,
+              ),
+            ),
+            failure: (failure) => Center(child: AppText(failure.message)),
+            loaded: (response) {
+              final courses = response.results;
+              if (courses.isEmpty) {
+                return const Center(child: Text("No courses found"));
+              }
+              return ListView.separated(
+                itemCount: courses.length,
+                separatorBuilder: (_, _) => const SizedBox(height: 12),
+                itemBuilder: (context, index) {
+                  final course = courses[index];
+                  return Card(
+                    child: ListTile(
+                      leading:course.thumbnail==null?Icon(Icons.image_not_supported): 
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                course.thumbnail!,
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                      title: AppText(course.title, type: AppTextType.label),
+                      subtitle: Column(
+                        crossAxisAlignment: .start,
+                        children: [
+                          AppText(course.trainerName),
+                          AppText(course.difficultyLevel),
+                         if(course.priceDetail!=null) AppText(
+                            "${course.priceDetail!.currency} ${course.priceDetail!.finalAmount}",
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+            orElse: () => Center(
+              child: LoadingAnimationWidget.flickr(
+                leftDotColor: Colors.red,
+                rightDotColor: Colors.cyanAccent,
+                size: 60,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

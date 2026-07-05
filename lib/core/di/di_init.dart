@@ -9,6 +9,11 @@ import 'package:lms_adv/features/auth/bloc/login/login_bloc.dart';
 import 'package:lms_adv/features/auth/bloc/signup/signup_bloc.dart';
 import 'package:lms_adv/features/auth/bloc/verify_email/verify_email_bloc.dart';
 import 'package:lms_adv/features/auth/repositories/auth_repositorires.dart';
+import 'package:lms_adv/features/course/bloc/create_course/create_course_bloc.dart';
+import 'package:lms_adv/features/course/bloc/get_category/get_category_bloc.dart';
+import 'package:lms_adv/features/course/bloc/get_course/get_course_bloc.dart';
+import 'package:lms_adv/features/course/repositories/category_repo.dart';
+import 'package:lms_adv/features/course/repositories/course_repo.dart';
 import 'package:lms_adv/features/home/repositories/profile_repository.dart';
 import 'package:lms_adv/features/trainer/bloc/trainer_apply/trainer_apply_bloc.dart';
 import 'package:lms_adv/features/trainer/bloc/trainer_profile/trainer_profile_bloc.dart';
@@ -25,6 +30,9 @@ void init() {
   sl.registerLazySingleton(() => VerifyEmailBloc(authRepositorires: sl()));
   sl.registerLazySingleton(() => TrainerApplyBloc(trainerRepository: sl()));
   sl.registerLazySingleton(() => TrainerProfileBloc(repo: sl()));
+  sl.registerLazySingleton(() => CreateCourseBloc(courseRepository: sl()));
+  sl.registerLazySingleton(() => GetCategoryBloc(categoryRepoI: sl()));
+  sl.registerLazySingleton(() => GetCourseBloc(courseRepository: sl()));
   //repo
   sl.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(apiServices: sl()),
@@ -35,6 +43,12 @@ void init() {
 
   sl.registerLazySingleton<TrainerRepository>(
     () => TrainerRepositoryimpl(apiservices: sl()),
+  );
+  sl.registerLazySingleton<CourseRepository>(
+    () => CourseRepositoryImpl(apiService: sl()),
+  );
+  sl.registerLazySingleton<CategoryRepoI>(
+    () => CategoryRepoImpl(apiServices: sl()),
   );
 
   //core
