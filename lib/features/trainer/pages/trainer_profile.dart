@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_adv/core/bloc/exports.dart';
 import 'package:lms_adv/core/route/route_name.dart';
+import 'package:lms_adv/core/widgets/app_image.dart';
 import 'package:lms_adv/features/trainer/bloc/trainer_profile/trainer_profile_bloc.dart';
 
 class TrainerProfile extends StatefulWidget {
@@ -52,11 +53,14 @@ class _TrainerProfileState extends State<TrainerProfile> {
                     Center(
                       child: Column(
                         children: [
-                          const CircleAvatar(
-                            radius: 50,
-                            child: Icon(Icons.person, size: 50),
+                          AppImage.circle(
+                            imageUrl: trainerProfileModel.profile.avatar,
                           ),
 
+                          // const CircleAvatar(
+                          //   radius: 50,
+                          //   child: Icon(Icons.person, size: 50),
+                          // ),
                           const SizedBox(height: 12),
 
                           Text(

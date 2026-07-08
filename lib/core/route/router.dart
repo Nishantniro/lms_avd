@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:lms_adv/core/models/profile_model.dart';
 import 'package:lms_adv/core/pages/splash_screen.dart';
 import 'package:lms_adv/core/route/route_name.dart';
 import 'package:lms_adv/features/auth/page/login_page.dart';
@@ -6,6 +7,7 @@ import 'package:lms_adv/features/auth/page/signup_page.dart';
 import 'package:lms_adv/features/auth/page/verify_email.dart';
 import 'package:lms_adv/features/course/pages/course_page/create_course.dart';
 import 'package:lms_adv/features/home/pages/home_page.dart';
+import 'package:lms_adv/features/home/pages/profile_edit_page.dart';
 import 'package:lms_adv/features/trainer/pages/apply_trainer.dart';
 import 'package:lms_adv/features/trainer/pages/trainer_profile.dart';
 
@@ -69,6 +71,14 @@ class AppRoute {
         name: RouteName.createCourse,
         builder: (context, state) {
           return CreateCourseFormPage();
+        },
+      ),
+      GoRoute(
+        path: RouteName.editProfile.path,
+        name: RouteName.editProfile,
+        builder: (context, state) {
+          final user = state.extra as ProfileModel;
+          return ProfileEditPage(user: user);
         },
       ),
     ],

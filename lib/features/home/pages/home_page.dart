@@ -7,6 +7,7 @@ import 'package:lms_adv/core/route/route_name.dart';
 import 'package:lms_adv/core/route/router.dart';
 import 'package:lms_adv/core/storage/token_storage.dart';
 import 'package:lms_adv/core/widgets/app_button.dart';
+import 'package:lms_adv/core/widgets/app_image.dart';
 import 'package:lms_adv/core/widgets/app_text.dart';
 import 'package:lms_adv/core/bloc/exports.dart';
 import 'package:lms_adv/features/course/bloc/get_course/get_course_bloc.dart';
@@ -52,10 +53,24 @@ class _HomepageState extends State<Homepage> {
                         padding: EdgeInsets.all(10),
                         child: Column(
                           children: [
-                            CircleAvatar(
-                              radius: 40,
-                              child: Icon(Icons.person, size: 50),
+                            Row(
+                              children: [
+                                AppImage.circle(imageUrl: profile.avatar),
+                                IconButton(
+                                  onPressed: () {
+                                    context.pushNamed(
+                                      RouteName.editProfile,
+                                      extra: profile,
+                                    );
+                                  },
+                                  icon: Icon(Icons.edit),
+                                ),
+                              ],
                             ),
+                            // CircleAvatar(
+                            //   radius: 40,
+                            //   child: Icon(Icons.person, size: 50),
+                            // ),
                             Gap(10),
                             AppText(profile.name, type: AppTextType.body),
                             Gap(4),
@@ -85,22 +100,22 @@ class _HomepageState extends State<Homepage> {
                               },
                             ),
                             Gap(10),
-                            AppButton(
-                              icon: Icons.logout,
-                              type: ButtonType.filled,
-                              text: "Logout",
-                              //icon: Icons.logout_rounded,
-                              backgroundColor: const Color.fromARGB(
-                                255,
-                                60,
-                                1,
-                                70,
-                              ),
-                              onPressed: () async {
-                                await sl<TokenStorageService>().clear();
-                                logout();
-                              },
-                            ),
+                            // AppButton(
+                            //   icon: Icons.logout,
+                            //   type: ButtonType.filled,
+                            //   text: "Logout",
+                            //   //icon: Icons.logout_rounded,
+                            //   backgroundColor: const Color.fromARGB(
+                            //     255,
+                            //     60,
+                            //     1,
+                            //     70,
+                            //   ),
+                            //   onPressed: () async {
+                            //     await sl<TokenStorageService>().clear();
+                            //     logout();
+                            //   },
+                            // ),
                           ],
                         ),
                       );
@@ -117,6 +132,17 @@ class _HomepageState extends State<Homepage> {
                       );
                     },
                   );
+                },
+              ),
+              AppButton(
+                icon: Icons.logout,
+                type: ButtonType.filled,
+                text: "Logout",
+                //icon: Icons.logout_rounded,
+                backgroundColor: const Color.fromARGB(255, 60, 1, 70),
+                onPressed: () async {
+                  await sl<TokenStorageService>().clear();
+                  logout();
                 },
               ),
             ],
@@ -147,8 +173,9 @@ class _HomepageState extends State<Homepage> {
                   final course = courses[index];
                   return Card(
                     child: ListTile(
-                      leading:course.thumbnail==null?Icon(Icons.image_not_supported): 
-                          ClipRRect(
+                      leading: course.thumbnail == null
+                          ? Icon(Icons.image_not_supported)
+                          : ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
                                 course.thumbnail!,
@@ -163,9 +190,10 @@ class _HomepageState extends State<Homepage> {
                         children: [
                           AppText(course.trainerName),
                           AppText(course.difficultyLevel),
-                         if(course.priceDetail!=null) AppText(
-                            "${course.priceDetail!.currency} ${course.priceDetail!.finalAmount}",
-                          ),
+                          if (course.priceDetail != null)
+                            AppText(
+                              "${course.priceDetail!.currency} ${course.priceDetail!.finalAmount}",
+                            ),
                         ],
                       ),
                     ),

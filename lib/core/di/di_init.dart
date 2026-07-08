@@ -1,5 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:lms_adv/core/bloc/bloc/update_profile_bloc.dart';
 import 'package:lms_adv/core/bloc/gatekeeper/gatekeeper_cubit.dart';
 import 'package:lms_adv/core/bloc/profile/profile_bloc.dart';
 import 'package:lms_adv/core/network/dio_client.dart';
@@ -33,6 +34,7 @@ void init() {
   sl.registerLazySingleton(() => CreateCourseBloc(courseRepository: sl()));
   sl.registerLazySingleton(() => GetCategoryBloc(categoryRepoI: sl()));
   sl.registerLazySingleton(() => GetCourseBloc(courseRepository: sl()));
+  sl.registerFactory(() => UpdateProfileBloc(repo: sl()));
   //repo
   sl.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(apiServices: sl()),

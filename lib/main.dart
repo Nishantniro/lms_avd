@@ -17,7 +17,7 @@ import 'package:lms_adv/features/trainer/bloc/trainer_profile/trainer_profile_bl
 void main() {
   init();
   runApp(const MyApp());
-}
+} 
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

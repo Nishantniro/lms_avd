@@ -34,7 +34,16 @@ class ErrorHandler {
   }
 
   static Failure _handleStatusCode(int? statusCode, dynamic data) {
-    final message = data?["detail"] ?? data?["message"] ?? data.toString();
+    // final message = data?["detail"] ?? data?["message"] ?? data.toString();
+    String message;
+    if (data is Map<String, dynamic>) {
+      message =
+          data["detail"]?.toString() ??
+          data["message"]?.toString() ??
+          data.toString();
+    } else {
+      message = data?.toString() ?? "Something went wrong";
+    }
 
     switch (statusCode) {
       case 400:

@@ -90,7 +90,7 @@ class ApiServices {
     T Function(dynamic)? fromJson,
   }) async {
     try {
-      final Response response = await _dio.delete(
+      final Response response = await _dio.patch(
         path,
         data: data,
         queryParameters: queryParameters,

@@ -7,6 +7,8 @@ class RouteName {
   static const String applyTrainer = "applyTrainer";
   static const String trainerProfile = "trainerProfile";
   static const String createCourse = "createCourse";
+    static const String editProfile = "editProfile";
+
 }
 
 extension Path on String {

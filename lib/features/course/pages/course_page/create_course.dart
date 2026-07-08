@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lms_adv/core/bloc/exports.dart';
+import 'package:lms_adv/core/extension/context_extension.dart';
 import 'package:lms_adv/core/widgets/app_button.dart';
 import 'package:lms_adv/core/widgets/app_text.dart';
 import 'package:lms_adv/core/widgets/custom_text_form.dart';
@@ -150,21 +152,21 @@ class _CreateCourseFormPageState extends State<CreateCourseFormPage> {
                         //     ? const Center(
                         //         child: Text("Select a main category"),
                         //       )
-                            // : SubCategory(
-                            //     parentCategory: selectedMainCategory!,
-                            //     onSelect: (category) {
-                            //       setState(() {
-                            //         selectedSubCategory = category;
-                            //       });
+                        // : SubCategory(
+                        //     parentCategory: selectedMainCategory!,
+                        //     onSelect: (category) {
+                        //       setState(() {
+                        //         selectedSubCategory = category;
+                        //       });
 
-                            //       if (category.isLeaf!) {
-                            //         _controller.nextPage(
-                            //           duration: Duration(milliseconds: 300),
-                            //           curve: Curves.easeIn,
-                            //         );
-                            //       }
-                            //     },
-                            //   ),
+                        //       if (category.isLeaf!) {
+                        //         _controller.nextPage(
+                        //           duration: Duration(milliseconds: 300),
+                        //           curve: Curves.easeIn,
+                        //         );
+                        //       }
+                        //     },
+                        //   ),
                       ],
                     ),
                   );
@@ -174,25 +176,38 @@ class _CreateCourseFormPageState extends State<CreateCourseFormPage> {
           ),
           AppText("Course Title", type: AppTextType.label),
           CustomTextForm(controller: _titleController),
-          AppButton(
-            text: "Create Course",
-            onPressed: () {
-              if (selectedMainCategory == null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Please select a category")),
-                );
-                return;
-              }
-
-              final form = CourseCreateForm(
-                title: _titleController.text,
-                categoryId: selectedMainCategory!.id!,
-              );
-
-              context.read<CreateCourseBloc>().add(
-                CreateCourseEvent.createCourse(form),
+          BlocListener<CreateCourseBloc, CourseCreateState>(
+            listener: (context, state) {
+              state.whenOrNull(
+                loaded: (data) {
+                  ContextExtension(context).pop();
+                  GoRouterHelper(context).pop();
+                },
+                loading: () {
+                  context.showDialogBox();
+                },
               );
             },
+            child: AppButton(
+              text: "Create Course",
+              onPressed: () {
+                if (selectedMainCategory == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Please select a category")),
+                  );
+                  return;
+                }
+
+                final form = CourseCreateForm(
+                  title: _titleController.text,
+                  categoryId: selectedMainCategory!.id!,
+                );
+
+                context.read<CreateCourseBloc>().add(
+                  CreateCourseEvent.createCourse(form),
+                );
+              },
+            ),
           ),
         ],
       ),
