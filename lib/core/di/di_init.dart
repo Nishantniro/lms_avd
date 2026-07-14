@@ -13,6 +13,7 @@ import 'package:lms_adv/features/auth/repositories/auth_repositorires.dart';
 import 'package:lms_adv/features/course/bloc/create_course/create_course_bloc.dart';
 import 'package:lms_adv/features/course/bloc/get_category/get_category_bloc.dart';
 import 'package:lms_adv/features/course/bloc/get_course/get_course_bloc.dart';
+import 'package:lms_adv/features/course/bloc/get_course_me/get_course_me_bloc.dart';
 import 'package:lms_adv/features/course/repositories/category_repo.dart';
 import 'package:lms_adv/features/course/repositories/course_repo.dart';
 import 'package:lms_adv/features/home/repositories/profile_repository.dart';
@@ -35,6 +36,7 @@ void init() {
   sl.registerLazySingleton(() => GetCategoryBloc(categoryRepoI: sl()));
   sl.registerLazySingleton(() => GetCourseBloc(courseRepository: sl()));
   sl.registerFactory(() => UpdateProfileBloc(repo: sl()));
+  sl.registerFactory(() => GetCourseMeBloc(courseRepository: sl()));
   //repo
   sl.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(apiServices: sl()),

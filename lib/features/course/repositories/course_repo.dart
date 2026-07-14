@@ -1,11 +1,13 @@
 import 'package:lms_adv/core/services/api_services.dart';
 import 'package:lms_adv/core/typedef/either.dart';
 import 'package:lms_adv/features/course/model/course_create_form.dart';
+import 'package:lms_adv/features/course/model/get_course_me_model.dart';
 import 'package:lms_adv/features/course/model/get_course_model.dart';
 
 abstract class CourseRepository {
   FutureEither<String> createCourse(CourseCreateForm form);
   FutureEither<GetCourseResponseModel> getCourses();
+  FutureEither<GetCourseResponseModelMe> getCoursesMe();
 }
 
 class CourseRepositoryImpl implements CourseRepository {
@@ -33,6 +35,17 @@ class CourseRepositoryImpl implements CourseRepository {
       queryParameters: queryParameters,
 
       fromJson: (map) => GetCourseResponseModel.fromMap(map),
+    );
+  }
+
+  @override
+  FutureEither<GetCourseResponseModelMe> getCoursesMe({
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    return await _apiService.get(
+      "/courses/me/",
+      queryParameters: queryParameters,
+      fromJson: (map) => GetCourseResponseModelMe.fromMap(map),
     );
   }
 }

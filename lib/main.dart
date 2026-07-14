@@ -11,13 +11,14 @@ import 'package:lms_adv/features/auth/bloc/verify_email/verify_email_bloc.dart';
 import 'package:lms_adv/features/course/bloc/create_course/create_course_bloc.dart';
 import 'package:lms_adv/features/course/bloc/get_category/get_category_bloc.dart';
 import 'package:lms_adv/features/course/bloc/get_course/get_course_bloc.dart';
+import 'package:lms_adv/features/course/bloc/get_course_me/get_course_me_bloc.dart';
 import 'package:lms_adv/features/trainer/bloc/trainer_apply/trainer_apply_bloc.dart';
 import 'package:lms_adv/features/trainer/bloc/trainer_profile/trainer_profile_bloc.dart';
 
 void main() {
   init();
   runApp(const MyApp());
-} 
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<GetCategoryBloc>()),
         BlocProvider(create: (context) => sl<CreateCourseBloc>()),
         BlocProvider(create: (context) => sl<GetCourseBloc>()),
+        BlocProvider(create: (context) => sl<GetCourseMeBloc>()),
       ],
       child: MaterialApp.router(
         title: 'LMS Advance',

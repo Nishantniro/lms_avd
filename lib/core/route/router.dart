@@ -6,6 +6,7 @@ import 'package:lms_adv/features/auth/page/login_page.dart';
 import 'package:lms_adv/features/auth/page/signup_page.dart';
 import 'package:lms_adv/features/auth/page/verify_email.dart';
 import 'package:lms_adv/features/course/pages/course_page/create_course.dart';
+import 'package:lms_adv/features/course/pages/course_page/my_course.dart';
 import 'package:lms_adv/features/home/pages/home_page.dart';
 import 'package:lms_adv/features/home/pages/profile_edit_page.dart';
 import 'package:lms_adv/features/trainer/pages/apply_trainer.dart';
@@ -79,6 +80,13 @@ class AppRoute {
         builder: (context, state) {
           final user = state.extra as ProfileModel;
           return ProfileEditPage(user: user);
+        },
+      ),
+      GoRoute(
+        path: RouteName.myCourse.path,
+        name: RouteName.myCourse,
+        builder: (context, state) {
+          return MyCourse();
         },
       ),
     ],

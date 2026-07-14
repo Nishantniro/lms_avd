@@ -100,6 +100,19 @@ class _HomepageState extends State<Homepage> {
                               },
                             ),
                             Gap(10),
+                            AppButton(
+                              backgroundColor: const Color.fromARGB(
+                                255,
+                                60,
+                                1,
+                                70,
+                              ),
+
+                              text: "My Courses",
+                              onPressed: () {
+                                context.pushNamed(RouteName.myCourse);
+                              },
+                            ),
                             // AppButton(
                             //   icon: Icons.logout,
                             //   type: ButtonType.filled,
